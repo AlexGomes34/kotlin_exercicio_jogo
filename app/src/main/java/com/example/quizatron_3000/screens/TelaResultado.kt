@@ -16,7 +16,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,11 +26,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.quizatron_3000.R
+import com.example.quizatron_3000.numeroPergunta.NumeroPerguntaAcertoViewModel
 import com.example.quizatron_3000.numeroPergunta.NumeroPerguntaViewModel
 
 
 @Composable
-fun TelaResultado(modifier: Modifier, navController: NavController, numeroPerguntaViewModel: NumeroPerguntaViewModel){
+fun TelaResultado(modifier: Modifier, navController: NavController, numeroPerguntaViewModel: NumeroPerguntaViewModel, numeroPerguntaAcertoViewModel: NumeroPerguntaAcertoViewModel, acertos: Int, nomeManeiro: String?){
+    val numeroP = numeroPerguntaViewModel.numeroPergunta.observeAsState(initial = 1)
     Column(modifier = modifier
         .fillMaxSize()) {
         Spacer(modifier = Modifier.size(20.dp))
@@ -65,7 +66,7 @@ fun TelaResultado(modifier: Modifier, navController: NavController, numeroPergun
                 ) {
                     Text(text = "Bom Trabalho", fontSize = 25.sp)
                 }
-                Text(text = "Voce acertou 1 de 3 perguntas", fontSize = 25.sp)
+                Text(text = "$nomeManeiro acertou $acertos de 3 perguntas", fontSize = 25.sp)
             }
         }
         Spacer(modifier = Modifier.size(40.dp))
@@ -78,8 +79,8 @@ fun TelaResultado(modifier: Modifier, navController: NavController, numeroPergun
                 shape = RoundedCornerShape(30.dp),
                 colors = ButtonColors(containerColor = Color(255, 215, 0), contentColor = Color.Black, disabledContainerColor = Color(255, 215, 0), disabledContentColor = Color.Black),
                 onClick = {
-                    numeroPerguntaViewModel.onNumeroPerguntaChange(0)
-                    navController.navigate("pergunta")
+                    numeroPerguntaViewModel.onNumeroPerguntaChange(1)
+                    navController.navigate("inicio")
                 }
             ) {
                 Text(text = "JOGAR NOVAMENTE", fontSize = 20.sp)
