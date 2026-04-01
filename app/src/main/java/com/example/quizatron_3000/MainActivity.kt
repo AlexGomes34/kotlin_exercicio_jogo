@@ -38,30 +38,43 @@ class MainActivity : ComponentActivity() {
                         exitTransition = {
                             slideOutOfContainer(
                                 towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                                animationSpec = tween (1000)
+                                animationSpec = tween(1000)
                             )
                         },
                         enterTransition = {
                             slideIntoContainer(
                                 towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                                animationSpec = tween (1000)
+                                animationSpec = tween(1000)
                             )
                         }
-                    ){
-                        composable (
+                    ) {
+                        composable(
                             route = "inicio"
-                        ){
+                        ) {
                             TelaHome(modifier = Modifier, navController = navController)
                         }
-                        composable (route = "pergunta/{nomeManeiro}") {
+                        composable(route = "pergunta/{nomeManeiro}") {
                             val nomeManeiro = it.arguments?.getString("nomeManeiro")
 
-                            TelaPergunta(modifier = Modifier, navController = navController, numeroPerguntaViewModel = viewModel, numeroPerguntaAcertoViewModel = numModel, nomeManeiro = nomeManeiro)
+                            TelaPergunta(
+                                modifier = Modifier,
+                                navController = navController,
+                                numeroPerguntaViewModel = viewModel,
+                                numeroPerguntaAcertoViewModel = numModel,
+                                nomeManeiro = nomeManeiro
+                            )
                         }
                         composable(route = "resultado/{nomeManeiro}/{acertos}") {
                             val acertos = it.arguments?.getString("acertos")?.toInt() ?: 0
                             val nomeManeiro = it.arguments?.getString("nomeManeiro")
-                            TelaResultado(modifier = Modifier, navController = navController, numeroPerguntaViewModel = viewModel, numeroPerguntaAcertoViewModel = numModel, acertos = acertos, nomeManeiro = nomeManeiro)
+                            TelaResultado(
+                                modifier = Modifier,
+                                navController = navController,
+                                numeroPerguntaViewModel = viewModel,
+                                numeroPerguntaAcertoViewModel = numModel,
+                                acertos = acertos,
+                                nomeManeiro = nomeManeiro
+                            )
                         }
                     }
                 }

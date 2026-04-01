@@ -31,14 +31,25 @@ import com.example.quizatron_3000.numeroPergunta.NumeroPerguntaViewModel
 
 
 @Composable
-fun TelaResultado(modifier: Modifier, navController: NavController, numeroPerguntaViewModel: NumeroPerguntaViewModel, numeroPerguntaAcertoViewModel: NumeroPerguntaAcertoViewModel, acertos: Int, nomeManeiro: String?){
+fun TelaResultado(
+    modifier: Modifier,
+    navController: NavController,
+    numeroPerguntaViewModel: NumeroPerguntaViewModel,
+    numeroPerguntaAcertoViewModel: NumeroPerguntaAcertoViewModel,
+    acertos: Int,
+    nomeManeiro: String?
+) {
     val numeroP = numeroPerguntaViewModel.numeroPergunta.observeAsState(initial = 1)
-    Column(modifier = modifier
-        .fillMaxSize()) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+    ) {
         Spacer(modifier = Modifier.size(20.dp))
-        Row(modifier = Modifier
-            .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
             Image(
                 modifier = Modifier
                     .size(80.dp)
@@ -48,19 +59,24 @@ fun TelaResultado(modifier: Modifier, navController: NavController, numeroPergun
             )
         }
         Spacer(modifier = Modifier.size(30.dp))
-        Row(modifier = Modifier
-            .fillMaxWidth()) {
-            Column(modifier = Modifier
+        Row(
+            modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.Cyan)
-                .height(200.dp),
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Cyan)
+                    .height(200.dp),
                 verticalArrangement = Arrangement.SpaceEvenly,
-                horizontalAlignment = Alignment.CenterHorizontally) {
-                Row(modifier = Modifier
-                    .size(height = 60.dp, width = 240.dp)
-                    .clip(shape = RoundedCornerShape(12.dp))
-                    .background(Color.Green)
-                    .border(width = 1.dp, color = Color.Black, RoundedCornerShape(12.dp)),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Row(
+                    modifier = Modifier
+                        .size(height = 60.dp, width = 240.dp)
+                        .clip(shape = RoundedCornerShape(12.dp))
+                        .background(Color.Green)
+                        .border(width = 1.dp, color = Color.Black, RoundedCornerShape(12.dp)),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -70,16 +86,25 @@ fun TelaResultado(modifier: Modifier, navController: NavController, numeroPergun
             }
         }
         Spacer(modifier = Modifier.size(40.dp))
-        Row(modifier = Modifier
-            .fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
             Button(
-                modifier = Modifier.size(width = 300.dp, height = 50.dp)
+                modifier = Modifier
+                    .size(width = 300.dp, height = 50.dp)
                     .border(2.dp, Color.Black, RoundedCornerShape(30.dp)),
                 shape = RoundedCornerShape(30.dp),
-                colors = ButtonColors(containerColor = Color(255, 215, 0), contentColor = Color.Black, disabledContainerColor = Color(255, 215, 0), disabledContentColor = Color.Black),
+                colors = ButtonColors(
+                    containerColor = Color(255, 215, 0),
+                    contentColor = Color.Black,
+                    disabledContainerColor = Color(255, 215, 0),
+                    disabledContentColor = Color.Black
+                ),
                 onClick = {
                     numeroPerguntaViewModel.onNumeroPerguntaChange(1)
+                    numeroPerguntaAcertoViewModel.reiniciarQuiz()
                     navController.navigate("inicio")
                 }
             ) {

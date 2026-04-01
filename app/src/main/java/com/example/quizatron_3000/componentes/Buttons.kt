@@ -28,35 +28,43 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun Botao(numeroPerguntaViewModel: NumeroPerguntaViewModel, navController: NavController, texto: String, perguntacConteudo: String, numeroPerguntaAcertoViewModel: NumeroPerguntaAcertoViewModel, nomeManeiro: String){
+fun Botao(
+    numeroPerguntaViewModel: NumeroPerguntaViewModel,
+    navController: NavController,
+    texto: String,
+    perguntacConteudo: String,
+    numeroPerguntaAcertoViewModel: NumeroPerguntaAcertoViewModel,
+    nomeManeiro: String
+) {
     val numeroP by numeroPerguntaViewModel.numeroPergunta.observeAsState(initial = 1)
-
     var corBotao by remember { mutableStateOf(Color.White) }
     val scope = rememberCoroutineScope()
 
-    Button(modifier = Modifier
-        .size(width = 330.dp, height = 60.dp)
-        .border(width = 1.dp, color = Color.LightGray, RoundedCornerShape(12.dp)),
+    Button(
+        modifier = Modifier
+            .size(width = 330.dp, height = 60.dp)
+            .border(width = 1.dp, color = Color.LightGray, RoundedCornerShape(12.dp)),
         shape = RoundedCornerShape(14.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = corBotao),
-            onClick = {
-                scope.launch {
-                    if(numeroP < 3){
-                    numeroPerguntaViewModel.onNumeroPerguntaChange(numeroP + 1)
-                    if (texto == perguntacConteudo){
-                        corBotao = Color.Green
-                        numeroPerguntaAcertoViewModel.onNumeroPerguntaCertoChange(1)
-                    }
-                }else{
-                    println(numeroPerguntaAcertoViewModel.numeroPerguntaCerto.value)
-                    navController.navigate("resultado/${nomeManeiro}/${numeroPerguntaAcertoViewModel.numeroPerguntaCerto.value}")
+        colors = ButtonDefaults.buttonColors(containerColor = corBotao),
+        onClick = {
+            scope.launch {
+                if (texto == perguntacConteudo) {
+                    corBotao = Color.Green
+                    numeroPerguntaAcertoViewModel.onNumeroPerguntaCertoChange(1)
+                } else {
                     corBotao = Color.Red
                 }
-                    delay(1000)
+                delay(1000)
+                corBotao = Color.White
+                if (numeroP < 3) {
+                    numeroPerguntaViewModel.onNumeroPerguntaChange(numeroP + 1)
+                } else {
+                    val acertos = numeroPerguntaAcertoViewModel.numeroPerguntaCerto.value ?: 0
+                    navController.navigate("resultado/${nomeManeiro}/$acertos")
                 }
-
-        }) {
+            }
+        }
+    ) {
         Text(text = texto, color = Color.Black)
     }
 }

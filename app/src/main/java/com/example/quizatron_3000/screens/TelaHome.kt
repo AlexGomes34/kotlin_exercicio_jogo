@@ -30,20 +30,23 @@ import com.example.quizatron_3000.R
 @Composable
 fun TelaHome(navController: NavController, modifier: Modifier) {
     var nomeManeiro by remember { mutableStateOf("") }
-    Column(modifier = modifier
-        .fillMaxSize()
-        .background(Color(0, 255, 255)),
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color(0, 255, 255)),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.size(100.dp))
         Image(
             painter = painterResource(R.drawable.quiz),
             contentDescription = "Broly",
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .size(150.dp)
         )
-        Spacer(modifier = Modifier
-            .size(80.dp)
+        Spacer(
+            modifier = Modifier
+                .size(80.dp)
         )
         Text(text = "QUIZATRON 3000", fontSize = 40.sp)
         Spacer(modifier = Modifier.size(60.dp))
@@ -59,10 +62,16 @@ fun TelaHome(navController: NavController, modifier: Modifier) {
         )
         Spacer(modifier = Modifier.size(60.dp))
         Button(
-            modifier = Modifier.size(width = 300.dp, height = 50.dp)
+            modifier = Modifier
+                .size(width = 300.dp, height = 50.dp)
                 .border(2.dp, Color.Black, RoundedCornerShape(30.dp)),
             shape = RoundedCornerShape(30.dp),
-            colors = ButtonColors(containerColor = Color(255, 215, 0), contentColor = Color.Black, disabledContainerColor = Color(255, 215, 0), disabledContentColor = Color.Black),
+            colors = ButtonColors(
+                containerColor = Color(255, 215, 0),
+                contentColor = Color.Black,
+                disabledContainerColor = Color(255, 215, 0),
+                disabledContentColor = Color.Black
+            ),
             onClick = {
                 navController.navigate("pergunta/$nomeManeiro")
             }

@@ -38,13 +38,13 @@ import com.example.quizatron_3000.numeroPergunta.NumeroPerguntaViewModel
 
 
 @Composable
-fun TelaPergunta(modifier: Modifier,
-                 navController: NavController,
-                 numeroPerguntaViewModel:
-                 NumeroPerguntaViewModel,
-                 numeroPerguntaAcertoViewModel:
-                 NumeroPerguntaAcertoViewModel,
-                 nomeManeiro: String?){
+fun TelaPergunta(
+    modifier: Modifier,
+    navController: NavController,
+    numeroPerguntaViewModel: NumeroPerguntaViewModel,
+    numeroPerguntaAcertoViewModel: NumeroPerguntaAcertoViewModel,
+    nomeManeiro: String?
+) {
     val numeroP by numeroPerguntaViewModel.numeroPergunta.observeAsState(initial = 1)
 
     val pergunta = PerguntacConteudo(
@@ -112,11 +112,13 @@ fun TelaPergunta(modifier: Modifier,
                         fontSize = 25.sp
                     )
                     pergunta.perguntaResposta.forEach { opcao ->
-                        Botao(numeroPerguntaViewModel, navController,
+                        Botao(
+                            numeroPerguntaViewModel, navController,
                             texto = opcao,
                             pergunta.respostaVerdade,
                             numeroPerguntaAcertoViewModel,
-                            nomeManeiro = nomeManeiro!!)
+                            nomeManeiro = nomeManeiro!!
+                        )
                     }
                 } else if (numeroP == 2) {
                     Text(
@@ -125,11 +127,13 @@ fun TelaPergunta(modifier: Modifier,
                         fontSize = 25.sp
                     )
                     pergunta2.perguntaResposta.forEach { opcao ->
-                        Botao(numeroPerguntaViewModel, navController,
+                        Botao(
+                            numeroPerguntaViewModel, navController,
                             texto = opcao,
                             pergunta2.respostaVerdade,
                             numeroPerguntaAcertoViewModel,
-                            nomeManeiro = nomeManeiro!!)
+                            nomeManeiro = nomeManeiro!!
+                        )
                     }
                 } else if (numeroP == 3) {
                     Text(
@@ -138,15 +142,17 @@ fun TelaPergunta(modifier: Modifier,
                         fontSize = 25.sp
                     )
                     pergunta3.perguntaResposta.forEach { opcao ->
-                        Botao(numeroPerguntaViewModel,
+                        Botao(
+                            numeroPerguntaViewModel,
                             navController,
                             texto = opcao,
                             pergunta3.respostaVerdade,
                             numeroPerguntaAcertoViewModel,
-                            nomeManeiro = nomeManeiro!!)
+                            nomeManeiro = nomeManeiro!!
+                        )
                     }
                 }
             }
         }
     }
-    }
+}
